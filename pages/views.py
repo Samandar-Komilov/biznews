@@ -9,12 +9,14 @@ class HomeView(View):
         top3_news = all_news[:3]
         last4_news = all_news.order_by('publish_time')[:4]
         breaking_news = all_news[4:7]
-        latest4_news = all_news[:4]
+        latest6_news = all_news[:6]
         context = {
             "all_news": all_news,
             "top3_news": top3_news,
             "last4_news": last4_news,
             "breaking_news": breaking_news,
-            "latest4_news": latest4_news
+            "latest6_news": latest6_news,
+            # "next4_news_col1": next2_news_col1,
+            # "next2_news_col2": next2_news_col2,
         }
         return render(request, 'index.html', context=context)

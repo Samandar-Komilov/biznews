@@ -43,6 +43,7 @@ class New(models.Model):
     status = models.CharField(max_length=2, 
                             choices=Status.choices,
                             default=Status.DRAFT)
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
     # view_count = models.IntegerField(default=0)
 
     published = PublishedNewsManager()

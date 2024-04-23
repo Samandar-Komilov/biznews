@@ -54,3 +54,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def has_module_perms(self, app_label):
         return self.is_staff
+
+    def get_fullname(self):
+        return f"{self.first_name} {self.last_name}"
