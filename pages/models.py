@@ -60,7 +60,18 @@ class New(models.Model):
 class Comment(models.Model):
    body = models.CharField(max_length=500)
    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+   post = models.ForeignKey(New, on_delete=models.CASCADE, null=True)
    commented_at = models.DateTimeField(auto_now_add=True)
 
    def __str__(self):
       return f"{self.owner.username}'s comment: {self.body[:10]}"
+   
+
+class Contact(models.Model):
+    fullname = models.CharField(max_length=256)
+    email = models.EmailField()
+    subject = models.CharField(max_length=256)
+    message = models.TextField()
+
+    def __str__(self):
+       return self.fullname

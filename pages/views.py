@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views import View, generic
 from django.db.models import Q
 from . import models
+from . import forms
 
 
 class HomeView(View):
@@ -38,10 +39,14 @@ class PostDetailView(View):
     def get(self, request, slug):
         all_news = models.New.published.all().order_by("-publish_time")
         new = models.New.published.get(slug=slug)
+        comments = models.Comment.objects.filter(post=new).order_by("commented_at")
+        comment_num = comments.count()
         breaking_news = all_news[4:7]
         context = {
             "new": new,
             'breaking_news': breaking_news,
+            'comments': comments,
+            'comment_num': comment_num,
         }
         return render(request, "detail.html", context=context)
     
@@ -49,6 +54,13 @@ class PostDetailView(View):
 class ContactView(View):
     def get(self, request):
         return render(request, "contact.html")
+    def post(self, request):
+        form = forms.ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('contact')
+        else:
+            form = forms.ContactForm()
     
 
 # Search news
