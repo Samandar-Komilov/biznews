@@ -20,3 +20,17 @@ class HomeView(View):
             # "next2_news_col2": next2_news_col2,
         }
         return render(request, 'index.html', context=context)
+
+
+class PostDetailView(View):
+    def get(self, request, slug):
+        new = models.New.published.get(slug=slug)
+        context = {
+            "new": new
+        }
+        return render(request, "detail.html", context=context)
+    
+
+class ContactView(View):
+    def get(self, request):
+        return render(request, "contact.html")
