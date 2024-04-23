@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views import View
+from django.views import View, generic
+from django.db.models import Q
 from . import models
 
 
@@ -48,3 +49,21 @@ class PostDetailView(View):
 class ContactView(View):
     def get(self, request):
         return render(request, "contact.html")
+    
+
+# Search news
+
+class SearchResultsList(View):
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return models.New.published.filter(
+            Q(title__icontains = query) | Q(subtitle__icontains = query)
+        )
+    
+    def get(self, request):
+        results = self.get_queryset()
+        context = {
+            "searched_news": results
+        }
+        print(results)
+        return render(request, "search-results.html", context=context)
