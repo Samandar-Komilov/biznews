@@ -22,11 +22,25 @@ class HomeView(View):
         return render(request, 'index.html', context=context)
 
 
+class CategoryView(View):
+    def get(self, request, category):
+        category_object = models.Category.objects.get(name=category)
+        category_news = models.New.published.filter(category = category_object)
+        context = {
+            'category_news': category_news,
+            'category': category,
+        }
+        return render(request, "category.html", context=context)
+
+
 class PostDetailView(View):
     def get(self, request, slug):
+        all_news = models.New.published.all().order_by("-publish_time")
         new = models.New.published.get(slug=slug)
+        breaking_news = all_news[4:7]
         context = {
-            "new": new
+            "new": new,
+            'breaking_news': breaking_news,
         }
         return render(request, "detail.html", context=context)
     

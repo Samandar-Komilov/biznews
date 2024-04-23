@@ -75,7 +75,7 @@
         </div>
         <div class="row align-items-center bg-white py-3 px-lg-5">
             <div class="col-lg-4">
-                <a href="index.html" class="navbar-brand p-0 d-none d-lg-block">
+                <a href="{% url "home" %}" class="navbar-brand p-0 d-none d-lg-block">
                     <h1 class="m-0 display-4 text-uppercase text-primary">Biz<span class="text-secondary font-weight-normal">News</span></h1>
                 </a>
             </div>
@@ -87,7 +87,7 @@
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2 py-lg-0 px-lg-5">
-            <a href="index.html" class="navbar-brand d-block d-lg-none">
+            <a href="{% url "home" %}" class="navbar-brand d-block d-lg-none">
                 <h1 class="m-0 display-4 text-uppercase text-primary">Biz<span class="text-white font-weight-normal">News</span></h1>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -95,15 +95,15 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active">Asosiy</a>
+                    <a href="{% url "home" %}" class="nav-item nav-link active">Asosiy</a>
                     {% for category in top_categories %}
-                    <a href="#" class="nav-item nav-link">{{category}}</a>
+                    <a href="{% url "category" category.name %}" class="nav-item nav-link">{{category}}</a>
                     {% endfor %}
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Boshqa kategoriyalar</a>
                         <div class="dropdown-menu rounded-0 m-0">
                             {% for category in dropdown_categories %}
-                            <a href="#" class="dropdown-item">{{category}}</a>
+                            <a href="{% url "category" category.name %}" class="dropdown-item">{{category}}</a>
                             {% endfor %}
                         </div>
                     </div>
@@ -148,7 +148,7 @@
                 <h5 class="mb-4 text-white text-uppercase font-weight-bold">Kategoriyalar</h5>
                 <div class="m-n1">
                     {% for category in all_categories %}
-                    <a href="" class="btn btn-sm btn-secondary m-1">{{category}}</a>
+                    <a href="{% url "category" category.name %}" class="btn btn-sm btn-secondary m-1">{{category}}</a>
                     {% endfor %}
                 </div>
             </div>
