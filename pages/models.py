@@ -19,6 +19,12 @@ class Tag(models.Model):
       return self.name
 
 
+# Custom Manager: Published
+class PublishedNewsManager(models.Manager):
+   def get_queryset(self) -> models.QuerySet:
+      return super().get_queryset().filter(status="PB")
+   
+
 class New(models.Model):
     class Status(models.TextChoices):
        DRAFT = "DF", "Draft"
@@ -38,6 +44,9 @@ class New(models.Model):
                             choices=Status.choices,
                             default=Status.DRAFT)
     # view_count = models.IntegerField(default=0)
+
+    published = PublishedNewsManager()
+
     class Meta:
         ordering = ["-publish_time"] 
     def __str__(self):
