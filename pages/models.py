@@ -1,6 +1,7 @@
 from django.utils import timezone
 from django.db import models
 from django.urls import reverse
+from django.core.validators import EmailValidator
 
 from users.models import CustomUser
 
@@ -69,7 +70,7 @@ class Comment(models.Model):
 
 class Contact(models.Model):
     fullname = models.CharField(max_length=256)
-    email = models.EmailField()
+    email = models.EmailField(validators=[EmailValidator])
     subject = models.CharField(max_length=256)
     message = models.TextField()
 

@@ -14,10 +14,17 @@
                         <h6 class="text-uppercase font-weight-bold mb-3">Savollaringizni yo'llang</h6>
                         <form method="POST">
                             {% csrf_token %}
+                            {% if messages %}
+                            <ul>
+                                {% for message in messages %}
+                                <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input name="fullname" type="text" class="form-control p-4" placeholder="Ismingiz..." required="required"/>
+                                        <input name="fullname" type="text" class="form-control p-4" placeholder="Ismingiz..." required="required" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">

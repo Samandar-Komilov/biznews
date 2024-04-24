@@ -4,6 +4,8 @@ from django.db.models import Q
 from . import models
 from . import forms
 
+from django.contrib import messages
+
 
 class HomeView(View):
     def get(self, request):
@@ -56,11 +58,15 @@ class ContactView(View):
         return render(request, "contact.html")
     def post(self, request):
         form = forms.ContactForm(request.POST)
+        print(form)
         if form.is_valid():
             form.save()
             return redirect('contact')
         else:
-            form = forms.ContactForm()
+            messages.error(request, "Please enter your credentials correctly!")
+            return render(request, "contact.html")
+            
+            
     
 
 # Search news
