@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <!-- SignUp Start -->
+    <div class="container-fluid mt-5 pt-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="section-title mb-0">
+                        <h4 class="m-0 text-uppercase font-weight-bold">Ro'yxatdan o'tish</h4>
+                    </div>
+                    <div class="bg-white border border-top-0 p-4 mb-3">
+                        <h6 class="text-uppercase font-weight-bold mb-3">Akkaunt yarating</h6>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {% if messages %}
+                            <ul>
+                                {% for message in messages %}
+                                <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <div class="form-group">
+                                <input name="email" type="email" class="form-control p-4" placeholder="Emailingiz..." required="required"/>
+                            </div>
+                            <div class="form-group">
+                                <input name="password1" type="password" class="form-control p-4" placeholder="Parolingiz..." required="required"/>
+                            </div>
+                            <div class="form-group">
+                                <input name="password2" type="password" class="form-control p-4" rows="4" placeholder="Parolingizni tasdiqlang..." required="required"></input>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary font-weight-semi-bold px-4" style="height: 50px;"
+                                    type="submit">Jo'natish</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- SignUp End -->
+
+{% endblock content %}
